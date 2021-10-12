@@ -10,6 +10,8 @@ describe("App.vue", () => {
   });
 });
 
+// Need isomorphic-fetch: yarn add -D isomorphic-fetch
+//
 // describe("App.vue", () => {
 //   it("Send Review To The Server", async () => {
 //     const review = { text: "تست", star: "5" };
