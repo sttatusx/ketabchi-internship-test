@@ -8,18 +8,16 @@ describe("App.vue", () => {
 
     expect(wrapper.componentVM.generateReviewFeedback("3")).toMatch(feedback);
   });
+
+  // Need isomorphic-fetch: yarn add -D isomorphic-fetch
+  //
+  //   it("Send Review To The Server", async () => {
+  //     const review = { text: "تست", star: "5" };
+  //     const serverResponseStatus = 201;
+  //     const wrapper = shallowMount(App, {});
+
+  //     expect(await wrapper.componentVM.sendReviewToTheServer(review)).toMatch(
+  //       serverResponseStatus
+  //     );
+  //   });
 });
-
-// Need isomorphic-fetch: yarn add -D isomorphic-fetch
-//
-// describe("App.vue", () => {
-//   it("Send Review To The Server", async () => {
-//     const review = { text: "تست", star: "5" };
-//     const serverResponseStatus = 201;
-//     const wrapper = shallowMount(App, {});
-
-//     expect(await wrapper.componentVM.sendReviewToTheServer(review)).toMatch(
-//       serverResponseStatus
-//     );
-//   });
-// });
