@@ -284,6 +284,11 @@ a {
   background-color: var(--red-color);
 }
 
+.action-button--disabled {
+  cursor: unset;
+  opacity: 0.8;
+}
+
 .action-button:hover {
   background-color: #de3744;
 }
