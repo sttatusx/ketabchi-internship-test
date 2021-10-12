@@ -42,71 +42,31 @@
       <span class="shared-section__title">ثبت امتیاز</span>
 
       <fieldset class="rating">
-        <input
-          type="radio"
-          id="star-5"
-          class="rating__input"
-          name="linear-rating"
-          value="5"
-        />
-        <label
-          for="star-5"
-          class="rating__label rating__label--last"
-          title="5"
-        ></label>
+        <template v-for="step in reviewSteps" :key="step">
+          <input
+            type="radio"
+            :id="`star-${step}`"
+            v-model="reviewStar"
+            class="rating__input"
+            name="linear-rating"
+            :value="step"
+          />
 
-        <input
-          type="radio"
-          id="star-4"
-          class="rating__input"
-          name="linear-rating"
-          value="4"
-        />
-        <label for="star-4" class="rating__label" title="4"></label>
-
-        <input
-          type="radio"
-          id="star-3"
-          class="rating__input"
-          name="linear-rating"
-          value="3"
-        />
-        <label for="star-3" class="rating__label" title="3"></label>
-
-        <input
-          type="radio"
-          id="star-2"
-          class="rating__input"
-          name="linear-rating"
-          value="2"
-        />
-        <label for="star-2" class="rating__label" title="2"></label>
-
-        <input
-          type="radio"
-          id="star-1"
-          class="rating__input"
-          name="linear-rating"
-          value="1"
-        />
-        <label for="star-1" class="rating__label" title="1"></label>
-
-        <input
-          type="radio"
-          id="nan"
-          class="rating__input"
-          name="linear-rating"
-          value="-"
-          checked
-        />
-        <label
-          for="nan"
-          class="rating__label rating__label--first"
-          title="-"
-        ></label>
+          <label
+            :for="`star-${step}`"
+            :class="[
+              'rating__label',
+              {
+                'rating__label--first': step === '-',
+                'rating__label--last': step === '5',
+              },
+            ]"
+            :title="step"
+          />
+        </template>
       </fieldset>
 
-      <span class="rating-text">معمولی</span>
+      <span class="rating-text">{{ generateReviewFeedback(reviewStar) }}</span>
     </div>
 
     <!-- Text Box -->
@@ -118,15 +78,27 @@
 
       <div class="text-box">
         <span class="text-box__title">متن نقد و بررسی</span>
-        <textarea class="text-box__textarea">عنوان ورودی متن</textarea>
+        <textarea
+          class="text-box__textarea"
+          v-model="reviewText"
+          :maxlength="characterLimit"
+        >
+          عنوان ورودی متن
+        </textarea>
       </div>
-      
-      <span class="remaining-characters">۲۹ از ۱۵۰۰</span>
+
+      <span class="remaining-characters">
+        {{ reviewLength }} از {{ characterLimit }}
+      </span>
     </div>
 
     <!-- Action Button -->
     <div class="action-container">
-      <button class="action-button">
+      <button
+        :disabled="loading"
+        @click="sendReviewToTheServer({ text: reviewText, star: reviewStar })"
+        :class="['action-button', { 'action-button--disabled': loading }]"
+      >
         ثبت نقد و بررسی
       </button>
     </div>
@@ -136,6 +108,60 @@
 <script>
 export default {
   name: "App",
+
+  data() {
+    return {
+      loading: false,
+      reviewStar: "-",
+      characterLimit: 1500,
+      reviewText: "عنوان ورودی متن",
+      reviewSteps: ["5", "4", "3", "2", "1", "-"],
+    };
+  },
+
+  computed: {
+    reviewLength() {
+      return this.reviewText.length;
+    },
+  },
+
+  methods: {
+    async sendReviewToTheServer(review) {
+      this.loading = true;
+
+      try {
+        // Of course, we use axios for production!
+        const result = await fetch("https://fake-request.com/review", {
+          method: "POST",
+          body: JSON.stringify(review),
+        });
+
+        if (result) {
+          // Do somthing ...
+        }
+      } catch (error) {
+        console.error("[sendReviewToTheServer] Error:", error);
+      } finally {
+        // To become more real!
+        setTimeout(() => (this.loading = false), 1000);
+      }
+    },
+
+    generateReviewFeedback(reviewStar) {
+      switch (reviewStar) {
+        case "5":
+          return "عالی";
+        case "4":
+          return "خوب";
+        case "3":
+          return "معمولی";
+        case "2":
+          return "نسبتا بد";
+        case "1":
+          return "بد";
+      }
+    },
+  },
 };
 </script>
 
