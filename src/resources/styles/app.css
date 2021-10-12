@@ -10,6 +10,17 @@
   --yellow-color: #ffb755;
 
   --background-color: #efefef;
+
+  --font-family: "Estedad", sans-serif;
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: Estedad;
+  font-weight: 1 999;
+  src: url('../fonts/Estedad/estedad.woff2') format('woff2'),
+    url('../fonts/Estedad/estedad.ttf') format('truetype');
 }
 
 /* Resets */
@@ -20,6 +31,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
 body {
