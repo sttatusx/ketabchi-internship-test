@@ -40,6 +40,13 @@ a {
   background-color: var(--white-color);
 }
 
+@media screen and (max-width: 360px) {
+  .container {
+    height: 40rem;
+    margin: 0 auto;
+  }
+}
+
 /* Navigation */
 
 .navigation-bar {
