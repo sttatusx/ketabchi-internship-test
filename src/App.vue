@@ -20,7 +20,7 @@
     <div class="book">
       <div class="book-image-box">
         <img
-          src="https://cdn.ketabchi.com/products/5907/images/ketab-general-book-oo2m.jpg"
+          src="@/resources/images/book.jpg"
           alt="زنان نامرئی چگونه دنیارا برای مردان طراحی کردند"
           class="book-image-box__image"
         />
