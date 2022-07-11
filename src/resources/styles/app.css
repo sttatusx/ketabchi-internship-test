@@ -11,6 +11,9 @@
 
   --background-color: #efefef;
 
+  --text-box-background: #f3f4f7;
+  --button-hover-color: #de3744;
+
   --font-family: "Estedad", sans-serif;
 }
 
@@ -251,7 +254,7 @@ a {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   flex-direction: column;
-  background-color: #f3f4f7;
+  background-color: var(--text-box-background);
 }
 
 .text-box__title {
@@ -312,5 +315,5 @@ a {
 }
 
 .action-button:hover {
-  background-color: #de3744;
+  background-color: var(--button-hover-color);
 }
