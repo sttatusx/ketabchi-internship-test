@@ -108,9 +108,12 @@ a {
 }
 
 .book-image-box__image {
+  top: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
 }
 
 .book-content-box {
