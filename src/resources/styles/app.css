@@ -127,6 +127,11 @@ a {
 .book-content-box__title {
   font-size: 1rem;
   line-height: 1.4rem;
+  transition: ease 0.2s color;
+}
+
+.book-content-box__title:hover {
+  color: var(--red-color);
 }
 
 .book-content-box__author {
